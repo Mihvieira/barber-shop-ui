@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --cor-principal: white;
+  --cor-secundaria: #191a1a;
+  --cor-terciaria: #dddddd;
+  --cor-letra2: #888888;
+  --font-principal: "Roboto", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: var(--font-principal);
+  color: var(--cor-secundaria);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: var(--cor-principal);
+  margin: 10px;
+}
+
+

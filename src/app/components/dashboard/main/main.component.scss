@@ -1,0 +1,19 @@
+.calendar-view {
+  margin-top: 10px;
+}
+
+.select-view {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.select-view h2 {
+  font-size: 17px;
+  align-self: baseline;
+  font-weight: normal;
+}
+
+.select-view ol {
+  font-size: 14px;
+  text-align: end;
+}

@@ -1,0 +1,66 @@
+.min-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.min-card h2 {
+  margin: 5px;
+  padding-left: 3px;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.next-schedule {
+  border-radius: 5px;
+  border: 1px solid var(--cor-terciaria);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.next-schedule-data {
+  border-bottom: 1px solid var(--cor-terciaria);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 0.25rem;
+  text-align: center;
+}
+
+.next-schedule-data a {
+  margin: 10px;
+  padding-top: 10px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 0.25rem;
+  color: var(--cor-secundaria);
+}
+
+.next-schedule-data a p {
+  font-size: 15px;
+  color: var(--cor-letra2);
+}
+
+.options-schedule {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.options-schedule ul {
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 1fr;
+  column-gap: 1rem;
+}
+
+.min-card .options-schedule ul li a {
+  padding-right: 0.4rem;
+  font-size: 14px;
+  align-content: center;
+  border: 1px solid transparent;
+}
+
+.min-card .options-schedule ul .schedule-bar a {
+  border-right-color: var(--cor-terciaria);
+  border-style: solid;
+  border-right-width: 1px;
+}

@@ -3,7 +3,7 @@
 :root {
   --cor-principal: white;
   --cor-secundaria: #191a1a;
-  --cor-terciaria: #dddddd;
+  --cor-terciaria: #DDDDDD;
   --cor-letra2: #888888;
   --font-principal: "Roboto", sans-serif;
 }
@@ -21,10 +21,6 @@
 html,
 body {
   height: 100%;
-}
-body {
-  background-color: var(--cor-principal);
-  margin: 10px;
 }
 
 

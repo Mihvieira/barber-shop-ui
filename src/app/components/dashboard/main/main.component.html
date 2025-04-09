@@ -1,18 +1,21 @@
-<app-menu-header [pageTitle]="'Dashboard'"></app-menu-header>
 <main>
   <app-min-card></app-min-card>
   <div class="calendar-view">
     <div class="select-view">
       <h2>Calendar</h2>
-      <ol>
-        <li>
-          Month
-          <span class="material-symbols-outlined"> keyboard_arrow_down </span>
-        </li>
-        <li>Agenda View</li>
-      </ol>
+      <button mat-button [matMenuTriggerFor]="menu">View <span class="material-symbols-outlined"> keyboard_arrow_down </span></button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="focusView('month')">Month</button>
+        <button mat-menu-item (click)="focusView('agenda')">Agenda</button>
+      </mat-menu>
     </div>
-    <app-calendar-card></app-calendar-card>
-    <app-agenda-view></app-agenda-view>
+      <div class="card-calendar">
+        <div id="calendar-view" class="show">
+          <app-calendar-card></app-calendar-card>
+        </div>
+        <div id="agenda-view" class="hide">
+          <app-agenda-view></app-agenda-view>
+        </div>
+      </div>
   </div>
 </main>

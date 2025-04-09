@@ -6,7 +6,7 @@ import { MainComponent } from "./components/dashboard/main/main.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MenuHeaderComponent, MenuFooterComponent, MainComponent],
+  imports: [RouterOutlet, MenuFooterComponent, MainComponent, MenuHeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

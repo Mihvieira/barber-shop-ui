@@ -1,12 +1,5 @@
-#agenda-view {
-  border: 1px solid var(--cor-terciaria);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
 
-#agenda-view table {
+table {
   border-collapse: collapse;
   text-align: center;
   padding: 10px;
@@ -18,7 +11,7 @@
   overflow-y: auto;
 }
 
-#agenda-view tr, th {
+tr, th {
   padding: 8px 10px;
   border-right: 1px solid var(--cor-terciaria);
 }

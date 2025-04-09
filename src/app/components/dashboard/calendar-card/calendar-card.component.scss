@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Garante que o componente ocupe 100% da altura do pai */
+}
+
+#month-calendar{
+  padding: 5px;
+  height: 100%;
+  overflow: auto;
+  @include mat.datepicker-overrides((
+    calendar-date-selected-state-background-color: var(--cor-secundaria),
+    calendar-date-today-outline-color: var(--cor-letra2),
+    calendar-container-background-color: var(--cor-terciaria),
+  ));
+}

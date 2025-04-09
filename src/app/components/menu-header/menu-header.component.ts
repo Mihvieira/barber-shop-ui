@@ -1,11 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-menu-header',
-  imports: [],
   templateUrl: './menu-header.component.html',
-  styleUrl: './menu-header.component.scss'
+  styleUrls: ['./menu-header.component.scss'],
 })
-export class MenuHeaderComponent {
-  @Input() pageTitle: string |undefined;
+export class MenuHeaderComponent implements OnInit {
+  @Input() pageTitle!: string;
+
+  constructor() {}
+
+  ngOnInit(): void {
+    console.log(this.pageTitle);
+  }
+
 }

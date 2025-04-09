@@ -1,5 +1,12 @@
+main{
+  margin: 10px;
+}
+
 .calendar-view {
   margin-top: 10px;
+  padding: 5px;
+  width: 99%;
+  height: 80%;
 }
 
 .select-view {
@@ -13,7 +20,51 @@
   font-weight: normal;
 }
 
-.select-view ol {
+.select-view button {
   font-size: 14px;
-  text-align: end;
+  justify-content: end;
+}
+
+.card-calendar{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+#calendar-view{
+  justify-content: center;
+}
+
+#agenda-view {
+  border: 1px solid var(--cor-terciaria);
+  border-radius: 5px;
+  justify-content: space-around;
+}
+
+.show{
+  display: flex;
+  flex-direction: column;
+}
+
+.hide{
+  display: none;
+}
+
+@media screen and (min-width: 420px) {
+  .calendar-view {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-calendar{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-around;
+  }
+
+  .hide{
+    display: flex;
+  }
 }

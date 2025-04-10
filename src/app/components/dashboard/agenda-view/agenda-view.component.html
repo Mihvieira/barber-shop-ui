@@ -1,12 +1,10 @@
-<div class="hour-bar">
-  <div class="circle"></div>
-</div>
-
 <table>
   <tbody>
     @for (hour of hours; track $index) {
-    <tr>
-      <th class="hour" scope="row">{{ hour }}</th>
+    <tr
+    [attr.id]="isCurrentHour(hour) ? 'timeNow' : ''"
+    >
+      <th class="hour" scope="row">{{ hour }}:00</th>
       <td>
         <ol class="event-details">
           <li>

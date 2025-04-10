@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-height: 390px;
   border: 1px solid var(--cor-terciaria);
   border-radius: 5px;
   justify-content: space-around;
@@ -15,7 +16,6 @@ table {
   border-collapse: collapse;
   text-align: center;
   letter-spacing: 1px;
-  overflow-y: auto;
   border: 1px solid var(--cor-terciaria);
 }
 
@@ -31,6 +31,10 @@ th {
   text-align: center; /* Centraliza o texto no cabeçalho */
   font-weight: bold; /* Destaca o cabeçalho */
   border: 2px solid var(--cor-terciaria); /* Adiciona borda inferior */
+}
+
+#timeNow{
+  background-color: var(--cor-terciaria);
 }
 
 .hour {
@@ -55,26 +59,4 @@ th {
   font-size: 14px;
   color: var(--cor-letra2);
   font-weight: normal;
-}
-
-.hour-bar {
-  position: absolute;
-  width: 30%;
-  height: 0.12rem;
-  z-index: 1;
-  left: 32%;
-  top: 37%;
-  background-color: var(--cor-secundaria);
-  border-radius: 8px;
-}
-
-.circle {
-  position: absolute;
-  left: 30%;
-  top: 36.5%;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background-color: var(--cor-secundaria);
-  z-index: 3;
 }

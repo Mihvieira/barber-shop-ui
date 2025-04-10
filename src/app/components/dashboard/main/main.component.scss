@@ -37,6 +37,11 @@ main {
   justify-content: center;
 }
 
+#agenda-view{
+  padding: 5px;
+  overflow-y: auto;
+}
+
 @media screen and (min-width: 420px) {
 
   .card-calendar {
@@ -48,6 +53,11 @@ main {
   #calendar-view,
   #agenda-view {
     display: block;
+    height: 100%;
+  }
+
+  .select-view{
+    display: none;
   }
 
 }

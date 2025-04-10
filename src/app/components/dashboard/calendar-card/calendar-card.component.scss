@@ -9,7 +9,6 @@
 #month-calendar{
   padding: 5px;
   height: 100%;
-  overflow: auto;
   @include mat.datepicker-overrides((
     calendar-date-selected-state-background-color: var(--cor-secundaria),
     calendar-date-today-outline-color: var(--cor-letra2),

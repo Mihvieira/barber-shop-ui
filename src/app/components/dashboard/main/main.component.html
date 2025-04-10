@@ -3,19 +3,21 @@
   <div class="calendar-view">
     <div class="select-view">
       <h2>Calendar</h2>
-      <button mat-button [matMenuTriggerFor]="menu">View <span class="material-symbols-outlined"> keyboard_arrow_down </span></button>
+      <button mat-button [matMenuTriggerFor]="menu">
+        View<span class="material-symbols-outlined"> keyboard_arrow_down </span>
+      </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="focusView('month')">Month</button>
         <button mat-menu-item (click)="focusView('agenda')">Agenda</button>
       </mat-menu>
     </div>
-      <div class="card-calendar">
-        <div id="calendar-view" class="show">
-          <app-calendar-card></app-calendar-card>
-        </div>
-        <div id="agenda-view" class="hide">
-          <app-agenda-view></app-agenda-view>
-        </div>
+    <div class="card-calendar">
+      <div id="calendar-view" *ngIf="currentView === 'month' || isLargeScreen">
+        <app-calendar-card></app-calendar-card>
       </div>
+      <div id="agenda-view" *ngIf="currentView === 'agenda' || isLargeScreen">
+        <app-agenda-view></app-agenda-view>
+      </div>
+    </div>
   </div>
 </main>

@@ -1,4 +1,4 @@
-main{
+main {
   margin: 10px;
 }
 
@@ -25,46 +25,29 @@ main{
   justify-content: end;
 }
 
-.card-calendar{
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-  }
+.card-calendar {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
 
-#calendar-view{
+#calendar-view {
   justify-content: center;
 }
 
-#agenda-view {
-  border: 1px solid var(--cor-terciaria);
-  border-radius: 5px;
-  justify-content: space-around;
-}
-
-.show{
-  display: flex;
-  flex-direction: column;
-}
-
-.hide{
-  display: none;
-}
-
 @media screen and (min-width: 420px) {
-  .calendar-view {
-    display: flex;
-    flex-direction: column;
-  }
 
-  .card-calendar{
+  .card-calendar {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-around;
   }
 
-  .hide{
-    display: flex;
+  #calendar-view,
+  #agenda-view {
+    display: block;
   }
+
 }

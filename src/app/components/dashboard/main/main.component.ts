@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MinCardComponent } from "../min-card/min-card.component";
 import { CalendarCardComponent } from "../calendar-card/calendar-card.component";
 import { AgendaViewComponent } from "../agenda-view/agenda-view.component";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-main',
@@ -13,28 +14,29 @@ import { MatButtonModule } from '@angular/material/button';
     AgendaViewComponent,
     MatButtonModule,
     MatMenuModule,
+    NgIf,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
+  currentView: string = 'month';
+  isLargeScreen: boolean = false;
 
-  focusView(elementId: string) {
-    const calendarCard = document.querySelector('app-calendar-card');
-    const agendaCard = document.querySelector('app-agenda-view');
-
-    if (elementId === "month") {
-      if (calendarCard) {
-      (calendarCard as HTMLElement).classList.add("show");
-      (agendaCard as HTMLElement).classList.remove('show');
-
-      }
-    } else{
-      if (agendaCard) {
-        (agendaCard as HTMLElement).classList.add('show');
-        (calendarCard as HTMLElement).classList.remove('show');
-      }
-    }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkScreenSize();
   }
 
+  ngOnInit(): void {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize(): void {
+    this.isLargeScreen = window.innerWidth > 420;
+  }
+
+  focusView(view: string): void {
+    this.currentView = view;
+  }
 }

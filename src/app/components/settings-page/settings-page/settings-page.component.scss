@@ -1,0 +1,25 @@
+
+main {
+  margin: 10px;
+  height: 100%;
+}
+
+.barbericon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.barbericon span{
+  height: 80px;
+  width: 80px;
+  line-height: 80px;
+  font-size: 80px;
+}
+
+.barbericon p{
+  font-size: 20px;
+  font-weight: bold;
+}

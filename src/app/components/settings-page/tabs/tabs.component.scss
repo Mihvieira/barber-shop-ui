@@ -1,0 +1,75 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+  overflow: auto;
+}
+
+.tabs{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  height: 100%;
+}
+
+.barber-list {
+  margin-top: 10px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  min-height: 64px;
+  margin-right: 10px;
+  border-bottom: 1px solid var(--cor-terciaria);
+}
+
+.edit {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  width: 25px;
+  height: 25px;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-details{
+  margin-top: 10px;
+  padding: 10px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  min-height: 64px;
+
+}
+
+.text-list{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: baseline;
+  row-gap: 10px;
+}
+
+.service-detail{
+  margin-top: 10px;
+  padding: 10px;
+  min-height: 60px;
+  margin-right: 10px;
+}
+
+.client-list{
+  margin-top: 10px;
+  padding: 10px;
+  display: flex;
+  min-height: 64px;
+}
+
+.client{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: space-around;
+}

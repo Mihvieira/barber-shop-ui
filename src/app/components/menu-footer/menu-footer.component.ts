@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu-footer',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './menu-footer.component.html',
-  styleUrl: './menu-footer.component.scss'
+  styleUrl: './menu-footer.component.scss',
 })
-export class MenuFooterComponent {
-
-}
+export class MenuFooterComponent {}

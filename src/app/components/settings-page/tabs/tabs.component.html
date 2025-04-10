@@ -1,61 +1,85 @@
 <div class="tabs">
-
-
-  <div class="barber">
-    <ol>
-      <li class="opening-time">
-        <img src="#" alt="clock-icon" />8 AM - 9 PM
-        <button name="edit"><img src="#" alt="edit-icon" /></button>
-      </li>
-      <li class="opening-days">
-        <img src="#" alt="calendar-icon" />Monday-Friday<button name="edit">
-          <img src="#" alt="edit-icon" />
-        </button>
-      </li>
-      <li class="services">
-        Service, Service, Service, Service
-        <button name="edit"><img src="#" alt="edit-icon" /></button>
-      </li>
-      <li class="service-details">
-        <ul>
-          <li>
-            <p>Service1</p>
-            <p>$8</p>
-            <button name="edit"><img src="#" alt="edit-icon" /></button>
-          </li>
-          <li>
-            <p>Service1</p>
-            <p>$8</p>
-            <button name="edit"><img src="#" alt="edit-icon" /></button>
-          </li>
-          <li>
-            <p>Service1</p>
-            <p>$8</p>
-            <button name="edit"><img src="#" alt="edit-icon" /></button>
-          </li>
-        </ul>
-      </li>
-    </ol>
-  </div>
-  <div class="clients">
-    <a href="#">All <img src="#" alt="icon" /></a>
-    <ul>
-      <li>
-        <img src="#" alt="human-icon" />Client Name
-        <a href="#"><img src="#" alt="points-icon" /></a>
-      </li>
-      <li>
-        <img src="#" alt="human-icon" />Client Name
-        <a href="#"><img src="#" alt="points-icon" /></a>
-      </li>
-      <li>
-        <img src="#" alt="human-icon" />Client Name
-        <a href="#"><img src="#" alt="points-icon" /></a>
-      </li>
-      <li>
-        <img src="#" alt="human-icon" />Client Name
-        <a href="#"><img src="#" alt="points-icon" /></a>
-      </li>
-    </ul>
-  </div>
+  <mat-tab-group>
+    <mat-tab label="Barber">
+      <ul>
+        <li class="opening-time barber-list">
+          <div class="text-list">
+            <span class="material-symbols-outlined"> schedule </span>
+            <p>8 AM - 9 PM</p>
+          </div>
+          <button name="edit" type="button" class="edit">
+            <span class="material-symbols-outlined"> edit </span>
+          </button>
+        </li>
+        <li class="opening-days barber-list">
+          <div class="text-list">
+            <span class="material-symbols-outlined"> calendar_month </span>
+            <p>Monday-Friday</p>
+          </div>
+          <button name="edit" type="button" class="edit">
+            <span class="material-symbols-outlined"> edit </span>
+          </button>
+        </li>
+        <li class="services barber-list">
+          <div class="text-list">
+            <span class="material-symbols-outlined"> content_cut </span>
+            <p>Service, Service, Service, Service</p>
+          </div>
+          <button name="edit" type="button" class="edit">
+            <span class="material-symbols-outlined"> edit </span>
+          </button>
+        </li>
+        <li>
+          <ul class="service-details">
+            <li class="service-detail">
+              <div>
+                <span class="material-symbols-outlined"> attach_money </span>
+                <p>Service1</p>
+              </div>
+              <p>$8</p>
+              <button name="edit" class="edit">
+                <span class="material-symbols-outlined"> edit </span>
+              </button>
+            </li>
+            <li class="service-detail">
+              <div>
+                <span class="material-symbols-outlined"> attach_money </span>
+                <p>Service1</p>
+              </div>
+              <p>$8</p>
+              <button name="edit" class="edit">
+                <span class="material-symbols-outlined"> edit </span>
+              </button>
+            </li>
+            <li class="service-detail">
+              <div>
+                <span class="material-symbols-outlined"> attach_money </span>
+                <p>Service1</p>
+              </div>
+              <p>$8</p>
+              <button name="edit" class="edit">
+                <span class="material-symbols-outlined"> edit </span>
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </mat-tab>
+    <mat-tab label="Clients">
+      <ul>
+        <li class="client-list">
+          <a class="client">
+            <span class="material-symbols-outlined"> account_circle </span>
+            <p>Client Name</p>
+          </a>
+        </li>
+        <li class="client-list">
+          <a class="client">
+            <span class="material-symbols-outlined"> account_circle </span>
+            <p>Client Name</p>
+          </a>
+        </li>
+      </ul>
+    </mat-tab>
+  </mat-tab-group>
 </div>

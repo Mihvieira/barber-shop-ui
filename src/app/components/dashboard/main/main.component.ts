@@ -5,6 +5,7 @@ import { AgendaViewComponent } from "../agenda-view/agenda-view.component";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +16,7 @@ import { NgIf } from '@angular/common';
     MatButtonModule,
     MatMenuModule,
     NgIf,
+    RouterModule,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',

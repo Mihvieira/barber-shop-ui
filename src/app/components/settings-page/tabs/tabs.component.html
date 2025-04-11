@@ -7,7 +7,7 @@
             <span class="material-symbols-outlined"> schedule </span>
             <p>8 AM - 9 PM</p>
           </div>
-          <button name="edit" type="button" class="edit">
+          <button name="edit" type="button" class="edit" onclick="editWorkingDays()">
             <span class="material-symbols-outlined"> edit </span>
           </button>
         </li>
@@ -25,7 +25,7 @@
             <span class="material-symbols-outlined"> content_cut </span>
             <p>Service, Service, Service, Service</p>
           </div>
-          <button name="edit" type="button" class="edit">
+          <button name="edit" type="button" class="edit" onclick="editClient(id)">
             <span class="material-symbols-outlined"> edit </span>
           </button>
         </li>
@@ -38,6 +38,16 @@
               </div>
               <p>$8</p>
               <button name="edit" class="edit">
+                <span class="material-symbols-outlined" onclick="editClient(id)"> edit </span>
+              </button>
+            </li>
+            <li class="service-detail">
+              <div>
+                <span class="material-symbols-outlined"> attach_money </span>
+                <p>Service1</p>
+              </div>
+              <p>$8</p>
+              <button name="edit" class="edit" onclick="editClient(id)">
                 <span class="material-symbols-outlined"> edit </span>
               </button>
             </li>
@@ -47,17 +57,7 @@
                 <p>Service1</p>
               </div>
               <p>$8</p>
-              <button name="edit" class="edit">
-                <span class="material-symbols-outlined"> edit </span>
-              </button>
-            </li>
-            <li class="service-detail">
-              <div>
-                <span class="material-symbols-outlined"> attach_money </span>
-                <p>Service1</p>
-              </div>
-              <p>$8</p>
-              <button name="edit" class="edit">
+              <button name="edit" class="edit" onclick="editClient(id)">
                 <span class="material-symbols-outlined"> edit </span>
               </button>
             </li>
@@ -67,6 +67,12 @@
     </mat-tab>
     <mat-tab label="Clients">
       <ul>
+        <li class="client-list">
+          <a routerLink="/clients" class="client" id="add-client">
+            <span class="material-symbols-outlined"> add_circle </span>
+            <p>Add Client</p>
+          </a>
+        </li>
         <li class="client-list">
           <a class="client">
             <span class="material-symbols-outlined"> account_circle </span>

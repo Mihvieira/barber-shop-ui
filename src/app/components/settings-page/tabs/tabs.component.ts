@@ -4,6 +4,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -13,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
+    RouterModule,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',

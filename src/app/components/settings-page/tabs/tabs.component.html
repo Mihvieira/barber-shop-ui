@@ -82,9 +82,9 @@
     </mat-tab>
     <mat-tab label="Clients">
       <ul>
-        @for (client of clients; track client.id) {
+        @for (client of clients; track $index) {
         <li class="client-list">
-          <a class="client">
+          <a class="client" routerLink="/client/{{ client.id }}">
             <span class="material-symbols-outlined"> account_circle </span>
             <p>{{ client.name }}</p>
           </a>

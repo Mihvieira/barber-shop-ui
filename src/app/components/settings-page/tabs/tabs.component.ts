@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { ClientMin } from '../../../models/client/client-min.model';
 import { BarberShopApiService } from '../../../service/barber-shop-api.service';
+import { ClientService } from '../../../service/client.service';
 
 @Component({
   selector: 'app-tabs',
@@ -25,16 +26,24 @@ import { BarberShopApiService } from '../../../service/barber-shop-api.service';
 export class TabsComponent implements OnInit {
   clients: Array<ClientMin> = [];
 
-  constructor(private service: BarberShopApiService){}
+  constructor(
+    private service: BarberShopApiService,
+    private clientService: ClientService
+  ) {}
 
   ngOnInit(): void {
-    this.service.getAllClients().subscribe(
-      (clientData : ClientMin[]) =>{
-        this.clients = clientData;
+    this.getClients();
+  }
+
+  getClients(): void {
+    this.clientService.getAllClients().subscribe({
+      next: (clientData) => {
+        this.clients = clientData as ClientMin[];
+        console.log(this.clients);
       },
-      (error:any) =>{
+      error: (error: any) => {
         console.error('Error to find Clients', error);
-      }
-    );
-  } //TODO: BARBERSERVICE ...
+      },
+    });
+  }
 }

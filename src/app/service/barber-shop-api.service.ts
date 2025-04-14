@@ -22,34 +22,7 @@ export class BarberShopApiService {
     this.baseUrl = environment.apiUrl;
   }
 
-  getAllClients(): Observable<Array<ClientMin>> {
-    const url = this.baseUrl + '/client';
-    return this.http.get<any>(url).pipe(
-      map((response) => {
-        console.log(response);
-        return response.results
-          ? response.results.map((client: any) =>
-              this.transformRequestToClient(client)
-            )
-          : [];
-      }),
-      catchError((error) => {
-        console.error('Failed to fetch clients: ', error);
-        throw error;
-      })
-    );
-  }
 
-  createClient(client: ClientPost): Observable<Client> {
-    const url = this.baseUrl + '/client';
-
-    return this.http.post<Client>(url, client).pipe(
-      catchError((error) => {
-        console.error('Failed to create client: ', error);
-        throw error;
-      })
-    );
-  }
 
   getAllSchedules(): Observable<Array<ScheduleMin>> {
     const url = this.baseUrl + '/schedule';
@@ -121,13 +94,6 @@ export class BarberShopApiService {
         throw error;
       })
     );
-  }
-
-  transformRequestToClient(data: any): ClientMin {
-    const client = new ClientMin();
-    client.id = data.id;
-    client.name = data.name;
-    return client;
   }
 
   transformRequestToScheduleMin(data: any): ScheduleMin {

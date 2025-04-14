@@ -6,11 +6,9 @@
           <th class="hour" scope="row">{{ hour }}:00</th>
           <td>
             <ol class="event-details">
-              @if (schedule.startTime?.startsWith(hour.toString())) {
+              @if (schedule.date?.startsWith(hour.toString())) {
                 <li>
-                  <h4>{{ schedule.client?.name }}</h4>
-                  <p>{{ schedule.barberService?.name }}</p>
-                  <p>{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+                  <p>{{ schedule.status }} - {{ schedule.status }}</p>
                 </li>
               } @else{
                 <li></li>

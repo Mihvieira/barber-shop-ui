@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BarberShopApiService } from '../../../service/barber-shop-api.service';
-import { Schedule } from '../../../models/schedule/schedule.model';
+import { Schedule, ScheduleMin } from '../../../models/schedule/schedule.model';
 import { DateSyncService } from '../../../service/DateSyncService.service';
 
 @Component({
@@ -11,9 +11,9 @@ import { DateSyncService } from '../../../service/DateSyncService.service';
 })
 export class AgendaViewComponent implements OnInit {
   hours: number[] = [];
-  dateTimeNow: number = Date.now();
+  dateTimeNow!: number;
   private intervalId: any;
-  schedules: Schedule[] = [];
+  schedules: ScheduleMin[] = [];
 
   @ViewChild('timeNow') timeNow!: ElementRef;
 
@@ -31,10 +31,10 @@ export class AgendaViewComponent implements OnInit {
       this.scrollToCurrentHour();
     }, 60000);
 
-    this.dateSyncService.currentDate$.subscribe((date) =>{
+    this.dateSyncService.currentDate$.subscribe((date) => {
       this.dateTimeNow = date.getTime();
-      this.getScheduleByDate()
-    })
+      this.getScheduleByDate();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -62,18 +62,29 @@ export class AgendaViewComponent implements OnInit {
   }
 
   getScheduleByDate(): void {
-    this.service
-      .getSchedulesBetweenDates(
-        new Date(this.dateTimeNow.toString()).toISOString(),
-        new Date(this.dateTimeNow.toString()).toISOString()
-      )
-      .subscribe({
-        next: (services) => {
-          this.schedules = services as Schedule[];
-        },
-        error: (err) => {
-          console.error('Error fetching schedules:', err);
-        },
-      });
+    if (!this.dateTimeNow || isNaN(this.dateTimeNow)) {
+      console.error('Invalid dateTimeNow value:', this.dateTimeNow);
+      return; // Evita continuar se a data for inválida
+    }
+
+    const currentDate = new Date(this.dateTimeNow);
+    if (isNaN(currentDate.getTime())) {
+      console.error(
+        'Invalid Date object created from dateTimeNow:',
+        currentDate
+      );
+      return; // Evita continuar se a data for inválida
+    }
+
+    const isoDate = currentDate.toISOString();
+
+    this.service.getSchedulesBetweenDates(isoDate, isoDate).subscribe({
+      next: (services) => {
+        this.schedules = services as ScheduleMin[];
+      },
+      error: (err) => {
+        console.error('Error fetching schedules:', err);
+      },
+    });
   }
 }

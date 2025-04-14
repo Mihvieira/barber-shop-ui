@@ -3,7 +3,7 @@
     <h1>Clients</h1>
   </div>
   <div class="container">
-    <form class="form">
+    <form class="form" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-25">
           <label for="clientId">Id</label>
@@ -14,6 +14,8 @@
             id="clientId"
             name="clientId"
             value="{{ client.id }}"
+            formControlName = "clientId"
+            readonly
           />
         </div>
       </div>
@@ -22,7 +24,7 @@
           <label for="name">Name</label>
         </div>
         <div class="col-75">
-          <input type="text" id="name" name="name" value="{{ client.name }}" />
+          <input type="text" id="name" name="name" value="{{ client.name }}" formControlName="name"/>
         </div>
       </div>
       <div class="row">
@@ -35,6 +37,7 @@
             id="email"
             name="email"
             value="{{ client.email }}"
+            formControlName="email"
           />
         </div>
       </div>
@@ -48,11 +51,12 @@
             id="phone"
             name="phone"
             value="{{ client.phone }}"
+            formControlName= "phone"
           />
         </div>
       </div>
       <div class="buttons">
-        <button type="submit" id="save-client" onclick="save()">Save</button>
+        <button type="submit" id="save-client" [disabled]="!clientForm.valid">Register</button>
       </div>
     </form>
   </div>

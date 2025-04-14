@@ -1,20 +1,26 @@
 <table>
   <tbody>
+  @for (schedule of schedules; track schedule.id) {
     @for (hour of hours; track $index) {
-    <tr
-    [attr.id]="isCurrentHour(hour) ? 'timeNow' : ''"
-    >
-      <th class="hour" scope="row">{{ hour }}:00</th>
-      <td>
-        <ol class="event-details">
-          <li>
-            <h4>Client Name</h4>
-            <p>Service Details</p>
-            <p>12AM - 12:30PM</p>
-          </li>
-        </ol>
-      </td>
-    </tr>
+        <tr [attr.id]="isCurrentHour(hour) ? 'timeNow' : ''">
+          <th class="hour" scope="row">{{ hour }}:00</th>
+          <td>
+            <ol class="event-details">
+              @if (schedule.startTime?.startsWith(hour.toString())) {
+                <li>
+                  <h4>{{ schedule.client?.name }}</h4>
+                  <p>{{ schedule.barberService?.name }}</p>
+                  <p>{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+                </li>
+              } @else{
+                <li></li>
+              }
+            </ol>
+          </td>
+        </tr>
+    }
+  } @empty{
+    <p>No Schedule found</p>
     }
   </tbody>
 </table>

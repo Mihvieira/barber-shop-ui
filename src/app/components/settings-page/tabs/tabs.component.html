@@ -7,7 +7,12 @@
             <span class="material-symbols-outlined"> schedule </span>
             <p>8 AM - 9 PM</p>
           </div>
-          <button name="edit" type="button" class="edit" onclick="editWorkingDays()">
+          <button
+            name="edit"
+            type="button"
+            class="edit"
+            onclick="editWorkingDays()"
+          >
             <span class="material-symbols-outlined"> edit </span>
           </button>
         </li>
@@ -25,7 +30,12 @@
             <span class="material-symbols-outlined"> content_cut </span>
             <p>Service, Service, Service, Service</p>
           </div>
-          <button name="edit" type="button" class="edit" onclick="editClient(id)">
+          <button
+            name="edit"
+            type="button"
+            class="edit"
+            onclick="editClient(id)"
+          >
             <span class="material-symbols-outlined"> edit </span>
           </button>
         </li>
@@ -38,7 +48,12 @@
               </div>
               <p>$8</p>
               <button name="edit" class="edit">
-                <span class="material-symbols-outlined" onclick="editClient(id)"> edit </span>
+                <span
+                  class="material-symbols-outlined"
+                  onclick="editClient(id)"
+                >
+                  edit
+                </span>
               </button>
             </li>
             <li class="service-detail">
@@ -67,24 +82,21 @@
     </mat-tab>
     <mat-tab label="Clients">
       <ul>
-        <li class="client-list">
-          <a routerLink="/clients" class="client" id="add-client">
-            <span class="material-symbols-outlined"> add_circle </span>
-            <p>Add Client</p>
-          </a>
-        </li>
+        @for (client of clients; track client.id) {
         <li class="client-list">
           <a class="client">
             <span class="material-symbols-outlined"> account_circle </span>
-            <p>Client Name</p>
+            <p>{{ client.name }}</p>
           </a>
         </li>
+        } @empty {
         <li class="client-list">
           <a class="client">
             <span class="material-symbols-outlined"> account_circle </span>
-            <p>Client Name</p>
+            <p>No client found</p>
           </a>
         </li>
+        }
       </ul>
     </mat-tab>
   </mat-tab-group>

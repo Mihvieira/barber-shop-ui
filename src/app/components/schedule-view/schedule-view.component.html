@@ -5,43 +5,35 @@
   <div class="container">
     <form class="form">
       <div class="row">
-        <div class="col-25">
-          <label for="scheduleId">Id</label>
-        </div>
         <div class="col-75">
           <input
             type="text"
             id="scheduleId"
             name="scheduleId"
             value="scheduleId"
+            disabled
           />
         </div>
       </div>
       <div class="row">
-        <div class="col-25">
-          <label for="clientId">clientId</label>
-        </div>
         <div class="col-75">
-          <input type="text" id="clientId" name="clientId" value="clientId" />
+          <input type="text" id="clientId" name="clientId" value="{{ clientId }}" disabled />
         </div>
       </div>
       <div class="row">
-        <div class="col-25">
-          <label for="baberServiceId">baberServiceId</label>
-        </div>
         <div class="col-75">
-          <input
-            type="text"
-            id="baberServiceId"
-            name="baberServiceId"
-            value="baberServiceId"
-          />
+          <label for="barber-service-id">Barber Service</label>
+          <select id="barber-service-id" name="barber-service-id">
+          @for(barberService of barberServices; track $index){
+            <option value="{{ barberService.id }}">{{ barberService.name }}</option>
+          }
+          </select>
         </div>
       </div>
       <div class="date-picker">
         <mat-form-field>
           <mat-label>Date</mat-label>
-          <input matInput [matDatepicker]="datepicker" [(ngModel)]="value" />
+          <input matInput [matDatepicker]="datepicker" [(ngModel)]="value" name="date-picker" />
           <mat-datepicker #datepicker />
           <mat-datepicker-toggle [for]="datepicker" matSuffix />
         </mat-form-field>
@@ -53,6 +45,7 @@
             [matTimepicker]="timepicker"
             [(ngModel)]="value"
             [ngModelOptions]="{ updateOn: 'blur' }"
+            name="timepicker"
           />
           <mat-timepicker #timepicker />
           <mat-timepicker-toggle [for]="timepicker" matSuffix />
@@ -65,36 +58,11 @@
           </div>
           <div class="col-75">
             <select id="status" name="status">
-              <option value="pending">Pending</option>
-              <option value="confirmed">Confirmed</option>
-              <option value="completed">Completed</option>
-              <option value="cancelled">Cancelled</option>
+              @for (stat of status; track $index) {
+                <option value="{{ stat }}">{{ stat }}</option>
+              }
             </select>
           </div>
-        </div>
-      </div>
-      <div class="payment">
-        <div class="row">
-          <div class="col-25">
-            <label for="payment">Payment</label>
-          </div>
-          <div class="col-75">
-            <input
-              type="text"
-              id="payment"
-              name="payment"
-              placeholder="Enter payment details"
-            />
-          </div>
-        </div>
-        <div class="buttons">
-          <button
-            type="button"
-            id="register-payment"
-            onclick="registerPayment()"
-          >
-            Register Payment
-          </button>
         </div>
       </div>
       <div class="buttons">

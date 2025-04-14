@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { BarberShopApiService } from '../../../service/barber-shop-api.service';
 
 @Component({
   selector: 'app-main',

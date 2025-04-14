@@ -11,8 +11,21 @@ export class Schedule {
   id: number | undefined;
   client: ClientMin | undefined;
   barberService: BarberServiceMin | undefined;
-  date: Date | undefined;
+  date: string | undefined;
   startTime: string | undefined;
   endTime: string | undefined;
   status: ScheduleStatus | undefined;
+}
+
+export class ScheduleMin {
+  id: number | undefined;
+  date: string | undefined;
+  status: ScheduleStatus | undefined;
+}
+
+export class ScheduleToCreate {
+  clientId!: number;
+  barberServiceId!: number;
+  date!: string;
+  status!: ScheduleStatus;
 }

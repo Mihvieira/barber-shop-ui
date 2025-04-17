@@ -4,7 +4,7 @@ import { ClientMin } from "../client/client-min.model";
 export enum ScheduleStatus {
   SCHEDULED = 'SCHEDULED',
   CANCELED = 'CANCELED',
-  COMPLETED = 'COMPLETED',
+  COMPLETED = 'COMPLETED'
 }
 
 export class Schedule {
@@ -19,6 +19,7 @@ export class Schedule {
 
 export class ScheduleMin {
   id: number | undefined;
+  clientName :string |undefined;
   date: string | undefined;
   status: ScheduleStatus | undefined;
 }
@@ -27,5 +28,5 @@ export class ScheduleToCreate {
   clientId!: number;
   barberServiceId!: number;
   date!: string;
-  status!: ScheduleStatus;
+  status!: string;
 }

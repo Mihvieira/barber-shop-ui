@@ -8,7 +8,7 @@
             <ol class="event-details">
               @if (schedule.date?.startsWith(hour.toString())) {
                 <li>
-                  <p>{{ schedule.status }} - {{ schedule.status }}</p>
+                  <p>{{ schedule.clientName }} - {{ schedule.status }}</p>
                 </li>
               } @else{
                 <li></li>

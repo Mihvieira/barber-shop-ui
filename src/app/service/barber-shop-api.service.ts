@@ -35,6 +35,7 @@ export class BarberShopApiService {
     final: string
   ): Observable<Array<ScheduleMin>> {
     const url = this.baseUrl + '/schedule/date/' + incial + '/' + final;
+    console.log(url)
     return this.http.get<ScheduleMin[]>(url).pipe(
       retry(2),
       catchError((error) => {
@@ -59,7 +60,7 @@ export class BarberShopApiService {
     return this.http.get<BarberServiceMin[]>(url).pipe(
       retry(2),
       catchError((error) => {
-        console.error('Failed to fetch schedules: ', error);
+        console.error('Failed to fetch barber services: ', error);
         throw error;
       })
     );

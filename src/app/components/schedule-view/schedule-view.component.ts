@@ -36,7 +36,6 @@ export class ScheduleViewComponent implements OnInit {
   barberServiceId! : number;
   stat!: string;
   barberServices: BarberServiceMin[] = [];
-  scheduleToCreate!: ScheduleToCreate;
   schedule!: Schedule;
 
   constructor(
@@ -49,35 +48,41 @@ export class ScheduleViewComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.clientId = Number(params['id']);
       this.getBarberServices();
+      this.getScheduleStatusValues();
     });
-
   }
 
   getBarberServices(): void {
     this.service
       .getAllBarberServices()
       .subscribe(
-        (barberServices: BarberServiceMin[]) =>
-          (this.barberServices = barberServices)
+        (services: BarberServiceMin[]) =>{
+          console.log(services)
+          this.barberServices = services
+        }
       );
   }
 
+  getScheduleStatusValues(): void {
+    const values = Object.values(ScheduleStatus);
+    this.status = values;
+}
+
   onSubmit(): void {
-    const scheduleToCreate = {
+    const scheduleToCreate : ScheduleToCreate = {
       clientId : this.clientId,
       barberServiceId: this.barberServiceId,
-      date: new Date(this.value).toISOString,
+      date: new Date(this.value).toISOString(),
       status: this.stat
     }
 
-    console.log('Saving client:', this.scheduleToCreate);
+    console.log('Saving schedule:', scheduleToCreate);
 
     this.service
-        .createSchedule(this.scheduleToCreate)
+        .createSchedule(scheduleToCreate)
         .subscribe(
           (scheduleSaved: Schedule) => (this.schedule = scheduleSaved)
         );
-      console.log('schedule saved', this.schedule);
       this.router.navigate(['']);
     }
 }

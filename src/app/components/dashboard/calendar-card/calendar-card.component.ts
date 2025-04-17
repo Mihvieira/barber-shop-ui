@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model, OnInit } from '@angular/core';
 import {
   MAT_DATE_LOCALE,
   provideNativeDateAdapter,
@@ -20,12 +20,18 @@ import { DateSyncService } from '../../../service/DateSyncService.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarCardComponent implements OnInit {
-  selected: Date = new Date();
+  selected!: Date;
   schedules: Schedule[] = [];
 
   constructor(private dateSyncService: DateSyncService) {}
 
   ngOnInit(): void {
+    this.selected = new Date(Date.now())
+    this.updateSelectedDate();
+  }
+
+  updateSelectedDate(): void {
+    console.log(this.selected.getDate.name)
     this.dateSyncService.updateDate(this.selected);
   }
 }

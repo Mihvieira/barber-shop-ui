@@ -1,5 +1,5 @@
 <div id="month-calendar">
   <mat-card class="calendar-card">
-    <mat-calendar [(selected)]="selected"></mat-calendar>
+    <mat-calendar [(selected)]="selected" (selectedChange)="updateSelectedDate()"></mat-calendar>
   </mat-card>
 </div>

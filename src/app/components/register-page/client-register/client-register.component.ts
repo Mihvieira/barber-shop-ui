@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { Client, ClientPost } from '../../../models/client/client.model';
-import { BarberShopApiService } from '../../../service/barber-shop-api.service';
 import { Router } from '@angular/router';
+import { ClientService } from '../../../service/client.service';
 
 @Component({
   selector: 'app-client-register',
@@ -14,22 +17,20 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonToggleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, // Certifique-se de que ReactiveFormsModule está aqui
   ],
   templateUrl: './client-register.component.html',
   styleUrl: './client-register.component.scss',
   standalone: true,
 })
 export class ClientRegisterComponent {
+  clientToRegister: ClientPost = new ClientPost();
   client: Client = new Client();
-  clientForm = new FormGroup({
-    clientId: new FormControl(''),
-    name: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl('')
-  })
+  name: string = '';
+  email: string = '';
+  phone: string = '';
 
-  constructor(private service: BarberShopApiService, private router: Router) {}
+  constructor(private service: ClientService, private router: Router) {}
 
   update(): void {
     const formInputs = document.querySelectorAll('.form input'); // Seleciona todos os inputs dentro da classe .form
@@ -38,25 +39,24 @@ export class ClientRegisterComponent {
     });
   }
 
-  onSubmit(){
-    console.warn(this.clientForm.value);
-    const formInputs = this.clientForm.value;
-    const clientToCreate = new ClientPost();
-    clientToCreate.name = formInputs.name ?? '';
-    clientToCreate.email = formInputs.email ?? '';
-    clientToCreate.phone = formInputs.phone ?? '';
+  onSubmit() {
+    const clientToCreate = {
+      name: this.name,
+      email: this.email,
+      phone: this.phone,
+    };
 
     console.log('Saving client:', clientToCreate);
 
-      this.service.createClient(clientToCreate).subscribe({
-        next: (clientSaved: Client) => {
-          this.client = clientSaved;
-          console.log('Client saved successfully:', clientSaved);
-          this.router.navigate(['/schedules'], { queryParams: this.client });
-        },
-        error: (error: any) => {
-          console.error('Error saving client:', error);
-        },
-      });
+    this.service.createClient(clientToCreate).subscribe({
+      next: (clientSaved: Client) => {
+        this.client = clientSaved;
+        console.log('Client saved successfully:', clientSaved);
+        this.router.navigate(['/schedules'], { queryParams: this.client });
+      },
+      error: (error: any) => {
+        console.error('Error saving client:', error);
+      },
+    });
   }
 }

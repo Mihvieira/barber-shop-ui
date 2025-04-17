@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { catchError, forkJoin, map, mergeMap, Observable } from 'rxjs';
-import { ClientMin } from '../models/client/client-min.model';
+import { catchError, map, mergeMap, Observable, retry } from 'rxjs';
 import {
   Schedule,
   ScheduleMin,
   ScheduleToCreate,
 } from '../models/schedule/schedule.model';
-import { Client, ClientPost } from '../models/client/client.model';
-import { BarberService } from '../models/barberService/barber-service.model';
 import { BarberServiceMin } from '../models/barberService/barber-service-min.model';
 
 @Injectable({
@@ -22,21 +19,12 @@ export class BarberShopApiService {
     this.baseUrl = environment.apiUrl;
   }
 
-
-
   getAllSchedules(): Observable<Array<ScheduleMin>> {
     const url = this.baseUrl + '/schedule';
-    return this.http.get<any>(url).pipe(
-      map((response) => {
-        console.log(response);
-        return response.results
-          ? response.results.map((schedule: any) =>
-              this.transformRequestToScheduleMin(schedule)
-            )
-          : [];
-      }),
+    return this.http.get<ScheduleMin[]>(url).pipe(
+      retry(2),
       catchError((error) => {
-        console.error('Failed to fetch clients: ', error);
+        console.error('Failed to fetch schedules: ', error);
         throw error;
       })
     );
@@ -47,17 +35,10 @@ export class BarberShopApiService {
     final: string
   ): Observable<Array<ScheduleMin>> {
     const url = this.baseUrl + '/schedule/date/' + incial + '/' + final;
-    return this.http.get<any>(url).pipe(
-      map((response) => {
-        console.log(response);
-        return response.results
-          ? response.results.map((schedule: any) =>
-              this.transformRequestToScheduleMin(schedule)
-            )
-          : [];
-      }),
+    return this.http.get<ScheduleMin[]>(url).pipe(
+      retry(2),
       catchError((error) => {
-        console.error('Failed to fetch clients: ', error);
+        console.error('Failed to fetch schedules: ', error);
         throw error;
       })
     );
@@ -74,55 +55,13 @@ export class BarberShopApiService {
   }
 
   getAllBarberServices(): Observable<Array<BarberServiceMin>> {
-    const url = this.baseUrl + '/barbar_service';
-    return this.http.get<any>(url).pipe(
-      map((response) => {
-        console.log(response);
-        return response.results
-          ? response.results.map(
-              (barberService: any) =>
-                new BarberServiceMin(
-                  barberService.id,
-                  barberService.name,
-                  barberService.duration
-                )
-            )
-          : [];
-      }),
+    const url = this.baseUrl + '/barber_service';
+    return this.http.get<BarberServiceMin[]>(url).pipe(
+      retry(2),
       catchError((error) => {
-        console.error('Failed to fetch clients: ', error);
+        console.error('Failed to fetch schedules: ', error);
         throw error;
       })
     );
-  }
-
-  transformRequestToScheduleMin(data: any): ScheduleMin {
-    const schedule = new ScheduleMin();
-    schedule.id = data.id;
-    schedule.date = data.date;
-    schedule.status = data.status;
-    return schedule;
-  }
-
-  transformRequestToSchedule(data: any): Schedule {
-    const schedule = new Schedule();
-    schedule.id = data.id;
-    schedule.barberService = data.barberService;
-    schedule.client = data.client;
-    schedule.date = data.date;
-    schedule.endTime = data.endTime;
-    schedule.startTime = data.startTime;
-    schedule.status = data.status;
-    return schedule;
-  }
-
-  transformRequestToBarberService(data: any): BarberService {
-    const barberService = new BarberService();
-    barberService.id = data.id;
-    barberService.name = data.name;
-    barberService.duration = data.duration;
-    barberService.price = data.price;
-    barberService.note = data.note;
-    return barberService;
   }
 }

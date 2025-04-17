@@ -24,7 +24,7 @@ import { ClientService } from '../../../service/client.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent implements OnInit {
-  clients: Array<ClientMin> = [];
+  clients!: Array<ClientMin>;
 
   constructor(
     private service: BarberShopApiService,
@@ -36,14 +36,8 @@ export class TabsComponent implements OnInit {
   }
 
   getClients(): void {
-    this.clientService.getAllClients().subscribe({
-      next: (clientData) => {
-        this.clients = clientData as ClientMin[];
-        console.log(this.clients);
-      },
-      error: (error: any) => {
-        console.error('Error to find Clients', error);
-      },
-    });
+    this.clientService
+      .getAllClients()
+      .subscribe((clients: ClientMin[]) => (this.clients = clients));
   }
 }

@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MinCardComponent } from "../min-card/min-card.component";
 import { CalendarCardComponent } from "../calendar-card/calendar-card.component";
 import { AgendaViewComponent } from "../agenda-view/agenda-view.component";
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,7 +10,6 @@ import { BarberShopApiService } from '../../../service/barber-shop-api.service';
 @Component({
   selector: 'app-main',
   imports: [
-    MinCardComponent,
     CalendarCardComponent,
     AgendaViewComponent,
     MatButtonModule,

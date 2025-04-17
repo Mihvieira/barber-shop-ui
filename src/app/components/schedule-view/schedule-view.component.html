@@ -3,28 +3,17 @@
     <h1>Schedule</h1>
   </div>
   <div class="container">
-    <form class="form">
+    <form class="form" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-75">
-          <input
-            type="text"
-            id="scheduleId"
-            name="scheduleId"
-            value="scheduleId"
-            disabled
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-75">
-          <input type="text" id="clientId" name="clientId" value="{{ clientId }}" disabled />
+          <input type="text" id="clientId" name="clientId" value="{{ clientId }}" disabled, [(ngModel)]="clientId" />
         </div>
       </div>
       <div class="row">
         <div class="col-75">
           <label for="barber-service-id">Barber Service</label>
-          <select id="barber-service-id" name="barber-service-id">
-          @for(barberService of barberServices; track $index){
+          <select id="barber-service-id" name="barber-service-id" [(ngModel)]="barberServiceId">
+          @for(barberService of barberServices; track barberService.id){
             <option value="{{ barberService.id }}">{{ barberService.name }}</option>
           }
           </select>
@@ -57,7 +46,7 @@
             <label for="status">Status</label>
           </div>
           <div class="col-75">
-            <select id="status" name="status">
+            <select id="status" name="status" [(ngModel)]="stat">
               @for (stat of status; track $index) {
                 <option value="{{ stat }}">{{ stat }}</option>
               }
@@ -66,7 +55,7 @@
         </div>
       </div>
       <div class="buttons">
-        <button type="submit" id="save-client" onclick="save()">Save</button>
+        <button type="submit" id="save-schedule">Save</button>
       </div>
     </form>
   </div>

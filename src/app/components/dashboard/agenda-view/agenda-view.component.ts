@@ -78,13 +78,8 @@ export class AgendaViewComponent implements OnInit {
 
     const isoDate = currentDate.toISOString();
 
-    this.service.getSchedulesBetweenDates(isoDate, isoDate).subscribe({
-      next: (services) => {
-        this.schedules = services as ScheduleMin[];
-      },
-      error: (err) => {
-        console.error('Error fetching schedules:', err);
-      },
-    });
+    this.service
+      .getSchedulesBetweenDates(isoDate, isoDate)
+      .subscribe((schedulesList: ScheduleMin[]) => (this.schedules = schedulesList));
   }
 }

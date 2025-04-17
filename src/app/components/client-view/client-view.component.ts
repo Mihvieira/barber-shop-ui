@@ -1,25 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { Client, ClientPost, ClientUpdate } from '../../models/client/client.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  Client,
+  ClientPost,
+  ClientUpdate,
+} from '../../models/client/client.model';
+import {
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BarberShopApiService } from '../../service/barber-shop-api.service';
 import { ClientService } from '../../service/client.service';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-client-view',
-  imports: [],
+  imports: [
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonToggleModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './client-view.component.html',
   styleUrl: './client-view.component.scss',
+  standalone: true,
 })
 export class ClientViewComponent implements OnInit {
-  id: number | undefined;
+  id!: number;
   client: Client = new Client();
-  clientForm = new FormGroup({
-    clientId: new FormControl(''),
-    name: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-  });
+  name: string = '';
+  email: string = '';
+  phone: string = '';
 
   constructor(private service: ClientService, private route: ActivatedRoute) {}
 
@@ -40,44 +56,23 @@ export class ClientViewComponent implements OnInit {
   }
 
   getClientById(id: number): void {
-    this.service.getClientById(id).subscribe({
-      next: (result: Client) => {
-        this.client = result;
-        console.log('Client fetched successfully:', this.client);
-      },
-      error: (error: any) => {
-        console.error('Error fetching client:', error);
-      },
-    });
+    this.service
+      .getClientById(id)
+      .subscribe((client: Client) => (this.client = client));
   }
 
   onSubmit() {
-    console.warn(this.clientForm.value);
-    const formInputs = this.clientForm.value;
-
-    // Validação para o item id
-    if (!formInputs.clientId || isNaN(Number(formInputs.clientId))) {
-      console.error('Invalid client ID:', formInputs.clientId);
-      alert('O ID do cliente é inválido. Por favor, insira um ID válido.');
-      return; // Interrompe a execução se o ID for inválido
-    }
-
-    const clientToUpdate = new ClientUpdate();
-    clientToUpdate.id = parseInt(String(formInputs.clientId ?? 0));
-    clientToUpdate.name = formInputs.name ?? '';
-    clientToUpdate.email = formInputs.email ?? '';
-    clientToUpdate.phone = formInputs.phone ?? '';
+    const clientToUpdate: ClientUpdate = {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      phone: this.phone,
+    };
 
     console.log('Saving client:', clientToUpdate);
 
-    this.service.updateClient(clientToUpdate).subscribe({
-      next: (clientSaved: Client) => {
-        this.client = clientSaved;
-        console.log('Client saved successfully:', clientSaved);
-      },
-      error: (error: any) => {
-        console.error('Error saving client:', error);
-      },
-    });
+    this.service
+      .updateClient(clientToUpdate)
+      .subscribe((clientSaved: Client) => (this.client = clientSaved));
   }
 }

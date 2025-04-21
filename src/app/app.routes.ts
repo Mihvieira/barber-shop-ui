@@ -10,4 +10,5 @@ export const routes: Routes = [
   { path: 'settings', component: SettingsPageComponent },
   {path:'clients', component:ClientRegisterComponent},
   {path: 'schedules', component: ScheduleViewComponent},
-  {path: 'client/id', component: ClientViewComponent}, //TODO: ...
+  {path: 'client/:id', component: ClientViewComponent},
+]

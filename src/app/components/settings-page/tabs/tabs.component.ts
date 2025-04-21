@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { ClientMin } from '../../../models/client/client-min.model';
 import { BarberShopApiService } from '../../../service/barber-shop-api.service';
 import { ClientService } from '../../../service/client.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tabs',
@@ -25,6 +26,7 @@ import { ClientService } from '../../../service/client.service';
 })
 export class TabsComponent implements OnInit {
   clients!: Array<ClientMin>;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private service: BarberShopApiService,
@@ -35,9 +37,14 @@ export class TabsComponent implements OnInit {
     this.getClients();
   }
 
+  ngOnDestroy():void{
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   getClients(): void {
     this.clientService
-      .getAllClients()
+      .getAllClients().pipe(takeUntil(this.destroy$))
       .subscribe((clients: ClientMin[]) => (this.clients = clients));
   }
 }

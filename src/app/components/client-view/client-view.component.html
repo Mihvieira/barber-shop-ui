@@ -3,6 +3,7 @@
     <h1>Clients</h1>
   </div>
   <div class="container">
+    @if(client){
     <form class="form" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-25">
@@ -61,8 +62,14 @@
         </div>
       </div>
       <div class="buttons">
-        <button type="submit" id="save-client">Register</button>
+        <button type="submit" id="update-client" class="button-option">Update</button>
       </div>
     </form>
+    } @else {
+      <p>No Client selected</p>
+    }
+    <div class="buttons">
+      <button (click)="deleteClient()" id="delete-client" class="button-option delete-button">Delete</button>
+    </div>
   </div>
 </main>

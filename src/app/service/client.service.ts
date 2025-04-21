@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ClientMin } from '../models/client/client-min.model';
@@ -49,10 +49,21 @@ export class ClientService {
     );
   }
 
-  updateClient(clientToUpdate: ClientUpdate): Observable<Client> {
+  updateClient(clientToUpdate: Partial<ClientUpdate>): Observable<Client> {
     return this.http.put<Client>(this.baseUrl, clientToUpdate).pipe(
       catchError((error) => {
-        console.error('Failed to create client: ', error);
+        console.error('Failed to update client: ', error);
+        throw error;
+      })
+    );
+  }
+
+  deleteById(id: number): Observable<HttpResponse<void>> {
+    const url = this.baseUrl + '/' + id;
+    console.log('delete ', id);
+    return this.http.delete<void>(url, { observe: 'response' }).pipe(
+      catchError((error) => {
+        console.error('Failed to delete client: ', error);
         throw error;
       })
     );

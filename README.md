@@ -1,59 +1,99 @@
-# BarberShopUi
+# Barber Shop UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+Este é o projeto **Barber Shop UI**, uma aplicação frontend desenvolvida em **Angular 19** para gerenciar agendamentos, clientes e serviços de uma barbearia. A aplicação utiliza o Angular Material para componentes visuais e segue boas práticas de desenvolvimento com TypeScript.
 
-## Development server
+## Tecnologias Utilizadas
 
-To start a local development server, run:
+- **Angular 19**: Framework principal para desenvolvimento frontend.
+- **Angular Material**: Biblioteca de componentes UI para Angular.
+- **TypeScript**: Linguagem de programação utilizada no projeto.
+- **RxJS**: Biblioteca para programação reativa.
+- **Bootstrap**: Estilização adicional.
+- **SCSS**: Pré-processador CSS para estilização.
 
-```bash
-ng serve
+## Funcionalidades
+
+- **Gerenciamento de Clientes**:
+  - Cadastro, edição e exclusão de clientes.
+  - Visualização de detalhes do cliente.
+
+- **Agendamentos**:
+  - Criação de agendamentos para clientes.
+  - Visualização de agendamentos no formato de calendário e agenda.
+
+- **Serviços**:
+  - Listagem de serviços disponíveis na barbearia.
+
+- **Configurações**:
+  - Gerenciamento de horários de funcionamento e outros ajustes.
+
+## Estrutura do Projeto
+
+A estrutura do projeto segue a organização padrão do Angular:
+```
+src/ ├── app/ │ ├── components/ # Componentes da aplicação │ ├── models/ # Modelos de dados │ ├── service/ # Serviços para comunicação com a API │ ├── app.component.ts # Componente raiz │ ├── app.routes.ts # Configuração de rotas │ └── app.config.ts # Configuração da aplicação ├── environments/ # Configurações de ambiente ├── styles.scss # Estilos globais └── main.ts # Arquivo principal de bootstrap
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Pré-requisitos
 
-## Code scaffolding
+Certifique-se de ter as seguintes ferramentas instaladas:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Node.js** (versão 18 ou superior)
+- **Angular CLI** (versão 19 ou superior)
 
-```bash
-ng generate component component-name
+## Instalação
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/barber-shop-ui.git
+   cd barber-shop-ui
+   ```
+
+2. Instale as dependências:
+```
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+3. Inicie o servidor de desenvolvimento:
+```
+npm start
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
+4. Acesse a aplicação no navegador:
+```
+http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Configuração de Ambiente
+Os arquivos de configuração de ambiente estão localizados na pasta src/environments. Por padrão, a aplicação utiliza o arquivo environment.ts para desenvolvimento.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+Exemplo de Configuração:
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080',
+};
 ```
+## Scripts Disponíveis
+* npm start: Inicia o servidor de desenvolvimento.
+* npm build: Gera a build de produção.
+* npm test: Executa os testes unitários.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Contribuição
+Contribuições são bem-vindas! Siga os passos abaixo para contribuir:
 
-## Additional Resources
+1. Faça um fork do repositório.
+2. Crie uma branch para sua feature:
+```
+git checkout -b minha-feature
+```
+3. Faça as alterações e commit:
+```
+git commit -m "Minha nova feature"
+```
+4. Envie suas alterações:
+```
+git push origin minha-feature
+```
+5. Abra um Pull Request.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

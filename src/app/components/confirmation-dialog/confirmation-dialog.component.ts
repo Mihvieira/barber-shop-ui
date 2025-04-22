@@ -1,15 +1,19 @@
 import { ChangeDetectionStrategy, Component, inject, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
-  imports: [],
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatButtonModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
 })
 export class ConfirmationDialogComponent {
-  readonly dialog = inject(MatDialog);
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,

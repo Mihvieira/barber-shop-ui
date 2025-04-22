@@ -4,7 +4,7 @@
   </div>
   <div class="container">
     @if(client){
-    <form class="form" (ngSubmit)="onSubmit()">
+    <form class="form">
       <div class="row">
         <div class="col-25">
           <label for="clientId">Id</label>
@@ -28,7 +28,7 @@
             type="text"
             id="name"
             name="name"
-            [(ngModel)]="name"
+            [(ngModel)]="this.name"
             value="{{ client.name }}"
           />
         </div>
@@ -42,7 +42,7 @@
             type="text"
             id="email"
             name="email"
-            [(ngModel)]="email"
+            [(ngModel)]="this.email"
             value="{{ client.email }}"
           />
         </div>
@@ -56,20 +56,21 @@
             type="text"
             id="phone"
             name="phone"
-            [(ngModel)]="phone"
+            [(ngModel)]="this.phone"
             value="{{ client.phone }}"
           />
         </div>
       </div>
       <div class="buttons">
-        <button type="submit" id="update-client" class="button-option">Update</button>
+        <button id="update-client" class="button-option" (click)="updateClientData()">Update</button>
+        <button (click)="deleteClient()" id="delete-client" class="button-option delete-button">Delete</button>
       </div>
     </form>
     } @else {
       <p>No Client selected</p>
     }
     <div class="buttons">
-      <button (click)="deleteClient()" id="delete-client" class="button-option delete-button">Delete</button>
+      <button (click)="scheduleClient()" id="delete-client" class="button-option delete-button">New Schedule</button>
     </div>
   </div>
 </main>

@@ -2,10 +2,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BarberShopApiService } from '../../../service/barber-shop-api.service';
 import { Schedule, ScheduleMin } from '../../../models/schedule/schedule.model';
 import { DateSyncService } from '../../../service/DateSyncService.service';
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-agenda-view',
   imports: [],
+  providers: [
+      provideNativeDateAdapter(),
+      { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    ],
   templateUrl: './agenda-view.component.html',
   styleUrl: './agenda-view.component.scss',
 })
@@ -62,7 +67,6 @@ export class AgendaViewComponent implements OnInit {
   }
 
   getScheduleByDate(): void {
-    console.log('date ',this.dateTimeNow)
     if (!this.dateTimeNow || isNaN(this.dateTimeNow)) {
       console.error('Invalid dateTimeNow value:', this.dateTimeNow);
       return; // Evita continuar se a data for inválida
@@ -78,12 +82,10 @@ export class AgendaViewComponent implements OnInit {
     }
 
     const isoDate = currentDate.toISOString();
-    console.log('isoDate', isoDate)
     this.service
       .getSchedulesBetweenDates(isoDate, isoDate)
       .subscribe((schedulesList: ScheduleMin[]) => {
         this.schedules = schedulesList
-        console.log('service:', this.schedules);
     });
   }
 }

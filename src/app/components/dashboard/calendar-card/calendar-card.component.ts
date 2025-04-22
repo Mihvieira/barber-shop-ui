@@ -14,7 +14,7 @@ import { DateSyncService } from '../../../service/DateSyncService.service';
   styleUrl: './calendar-card.component.scss',
   providers: [
     provideNativeDateAdapter(),
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
   ],
   imports: [MatCardModule, MatDatepickerModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,7 +31,6 @@ export class CalendarCardComponent implements OnInit {
   }
 
   updateSelectedDate(): void {
-    console.log(this.selected.getDate.name)
     this.dateSyncService.updateDate(this.selected);
   }
 }

@@ -6,13 +6,13 @@
     <form class="form" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-75">
-          <input type="text" id="clientId" name="clientId" value="{{ clientId }}" [(ngModel)]="clientId" />
+          <input type="text" id="clientId" name="clientId" value="{{ this.clientId }}" [(ngModel)]="this.clientId" />
         </div>
       </div>
       <div class="row">
         <div class="col-75">
           <label for="barber-service-id">Barber Service</label>
-          <select id="barber-service-id" name="barber-service-id" [(ngModel)]="barberServiceId">
+          <select id="barber-service-id" name="barber-service-id" [(ngModel)]="this.barberServiceId">
           @for(barberService of barberServices; track barberService.id){
             <option value="{{ barberService.id }}">{{ barberService.name }}</option>
           }
@@ -22,7 +22,7 @@
       <div class="date-picker">
         <mat-form-field>
           <mat-label>Date</mat-label>
-          <input matInput [matDatepicker]="datepicker" [(ngModel)]="value" name="date-picker" />
+          <input matInput [matDatepicker]="datepicker" [(ngModel)]="this.value" name="date-picker" />
           <mat-datepicker #datepicker />
           <mat-datepicker-toggle [for]="datepicker" matSuffix />
         </mat-form-field>
@@ -30,9 +30,10 @@
         <mat-form-field>
           <mat-label>Time</mat-label>
           <input
+            type = "time"
             matInput
             [matTimepicker]="timepicker"
-            [(ngModel)]="value"
+            [(ngModel)]="this.value"
             [ngModelOptions]="{ updateOn: 'blur' }"
             name="timepicker"
           />
@@ -46,7 +47,7 @@
             <label for="status">Status</label>
           </div>
           <div class="col-75">
-            <select id="status" name="status" [(ngModel)]="stat">
+            <select id="status" name="status" [(ngModel)]="this.stat">
               @for (stat of status; track $index) {
                 <option value="{{ stat }}">{{ stat }}</option>
               }

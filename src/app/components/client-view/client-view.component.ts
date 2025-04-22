@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   FormsModule,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '../../service/client.service';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -36,15 +36,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 export class ClientViewComponent implements OnInit {
   id!: number;
   client: Client = new Client();
-  name: string = '';
-  email: string = '';
-  phone: string = '';
+  name: string = this.client.name ?? '';
+  email: string = this.client.email ?? '';
+  phone: string = this.client.phone ?? '';
   private destroy$ = new Subject<void>();
 
   constructor(
     private service: ClientService,
     private route: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -72,47 +73,55 @@ export class ClientViewComponent implements OnInit {
     this.service
       .getClientById(id)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((client: Client) => (this.client = client));
+      .subscribe((client: Client) => {
+        this.client = client;
+        this.name = client.name ?? '';
+        this.email = client.email ?? '';
+        this.phone = client.phone ?? '';
+      });
   }
 
-  onSubmit() {
+  updateClientData() {
     const clientToUpdate: Partial<ClientUpdate> = {}; // Usar Partial para permitir campos opcionais
     clientToUpdate.id = this.id;
     clientToUpdate.name = this.name;
     clientToUpdate.email = this.email;
     clientToUpdate.phone = this.phone;
+    console.log('client to update: ', clientToUpdate);
 
-    // Verifica se há alterações
-    if (Object.keys(clientToUpdate).length === 0) {
-      console.error('No changes to update');
-      return;
-    }
-
-    // Envia apenas os campos alterados
-    this.updateClientData(clientToUpdate);
-  }
-
-  updateClientData(clientToUpdate: Partial<ClientUpdate>) {
-    this.service
-      .updateClient(clientToUpdate)
+    this.dialogService
+      .openConfirmationDialog(
+        'Confirm Update',
+        'Are you sure you want to update this item?'
+      )
       .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (clientSaved: Client) => {
-          this.client = clientSaved;
-          this.name = clientSaved.name ?? '';
-          this.email = clientSaved.email ?? '';
-          this.phone = clientSaved.phone ?? '';
-          this.dialogService.openConfirmationDialog(
-            'Sucesso',
-            'Cliente atualizado com sucesso'
-          );
-        },
-        error: (err: any) => {
-          this.dialogService.openConfirmationDialog(
-            'Erro',
-            `Falha ao atualizar o cliente. Por favor, tente novamente. Erro: ${err.error}`
-          );
-        },
+      .subscribe((result: any) => {
+        if (result) {
+          this.service
+            .updateClient(clientToUpdate)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+              next: (clientSaved: Client) => {
+                this.client = clientSaved;
+                this.name = clientSaved.name ?? '';
+                this.email = clientSaved.email ?? '';
+                this.phone = clientSaved.phone ?? '';
+                this.dialogService.openConfirmationDialog(
+                  'Sucesso',
+                  'Cliente atualizado com sucesso'
+                );
+              },
+              error: (err: any) => {
+                console.error('Error deleting client:', err);
+                this.dialogService.openConfirmationDialog(
+                  'Erro',
+                  `Falha ao atualizar o cliente. Por favor, tente novamente. Erro: ${err.error}`
+                );
+              },
+            });
+        } else {
+          console.log('update cancelled');
+        }
       });
   }
 
@@ -154,5 +163,9 @@ export class ClientViewComponent implements OnInit {
           console.log('Delete cancelled');
         }
       });
+  }
+
+  scheduleClient() {
+    this.router.navigate(['/schedules'], { queryParams: this.client });
   }
 }
